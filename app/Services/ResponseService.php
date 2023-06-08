@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
-class ResponseController extends Controller
+class ResponseService extends Controller
 {
     /*
     |--------------------------------------------------------------------------

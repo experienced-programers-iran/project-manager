@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Http\Requests;
 
-use App\Http\Controllers\ResponseController;
+use App\Services\ResponseService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -35,7 +35,7 @@ class RegisterRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $response = (new ResponseController())->generateResponse(
+        $response = (new ResponseService())->generateResponse(
             result: $validator->errors(),
             success: false,
             status_code: 400
