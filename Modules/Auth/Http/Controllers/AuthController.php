@@ -3,19 +3,28 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Services\ResponseService;
+use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Entities\User;
 use Modules\Auth\Http\Requests\RegisterRequest;
+use Modules\Auth\Repositories\Interface\UserRepositoryInterface;
 use Modules\Auth\Transformers\UserResource;
 
 class AuthController extends ResponseService
 {
+    protected UserRepositoryInterface $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     public function register(RegisterRequest $request)
     {
-        $user = new User();
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->password=bcrypt($request->input('password'));
-        $user->save();
+        /** @var User $user */
+        $user=$this->userRepository->create([
+            'name'=>$request->input('name'),
+            'email'=>$request->input('email'),
+            'password'=>Hash::make($request->input('password'))
+        ]);
 
 
 
@@ -24,5 +33,11 @@ class AuthController extends ResponseService
         $user->accessToken=$token;
 
         return $this->generateResponse(result:UserResource::make($user));
+    }
+
+    public function getUser()
+    {
+        $user=\Auth::user();
+        return $this->generateResponse(result: UserResource::make($user));
     }
 }
