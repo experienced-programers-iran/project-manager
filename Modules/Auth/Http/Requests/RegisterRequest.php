@@ -37,8 +37,8 @@ class RegisterRequest extends FormRequest
     {
         $response = (new ResponseService())->generateResponse(
             result: $validator->errors(),
-            success: false,
-            status_code: 400
+            status: false,
+            statusCode: 400
         );
 
 

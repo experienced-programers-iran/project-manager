@@ -17,20 +17,20 @@ class ResponseService extends Controller
     */
     /**
      * @param null $result
-     * @param bool $success
+     * @param bool $status
      * @param null $message
-     * @param int $status_code
+     * @param int $statusCode
      * @return JsonResponse
      */
     public function generateResponse(
-        $result = null,
-        bool $success = true,
-        $message = null,
-        int $status_code = 200
+             $result = null,
+        bool $status = true,
+             $message = null,
+        int $statusCode = 200
     ): JsonResponse
     {
         $response = [
-            'success' => $success,
+            'status' => $status,
         ];
 
         if ($result !== null) {
@@ -40,6 +40,6 @@ class ResponseService extends Controller
             $response['message'] = $message;
         }
 
-        return response()->json($response, $status_code);
+        return response()->json($response, $statusCode);
     }
 }
