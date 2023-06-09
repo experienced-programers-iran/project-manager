@@ -2,42 +2,49 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use App\Services\ResponseService;
+use Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Entities\User;
+use Modules\Auth\Http\Requests\LoginRequest;
 use Modules\Auth\Http\Requests\RegisterRequest;
-use Modules\Auth\Repositories\Interface\UserRepositoryInterface;
 use Modules\Auth\Transformers\UserResource;
 
-class AuthController extends ResponseService
+class AuthController extends UserController
 {
-    protected UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): JsonResponse
     {
         /** @var User $user */
-        $user=$this->userRepository->create([
-            'name'=>$request->input('name'),
-            'email'=>$request->input('email'),
-            'password'=>Hash::make($request->input('password'))
+        $user = $this->userRepository->create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
         ]);
 
 
-
-        $token = $user->createToken('AuthToken')->accessToken;
+        $accessToken = $this->getAccessToken($user);
         $user->refresh();
-        $user->accessToken=$token;
-
-        return $this->generateResponse(result:UserResource::make($user));
+        $user->accessToken = $accessToken;
+        return $this->generateResponse(result: UserResource::make($user));
     }
 
-    public function getUser()
+    public function login(LoginRequest $request): JsonResponse
     {
-        $user=\Auth::user();
-        return $this->generateResponse(result: UserResource::make($user));
+        $user = $this->userRepository->getByEmail($request->email);
+        if ($user && Hash::check($request->password, $user->password)) {
+            $accessToken = $this->getAccessToken($user);
+            $user->accessToken = $accessToken;
+            return $this->generateResponse(result: UserResource::make($user));
+        }
+        return $this->generateResponse(status: false, message: __('auth.attemptFailed'));
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function getAccessToken(User $user): string
+    {
+        return $user->createToken('authToken')->accessToken;
     }
 }

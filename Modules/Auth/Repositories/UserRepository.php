@@ -11,4 +11,9 @@ use Modules\Auth\Repositories\Interface\UserRepositoryInterface;
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     protected string $model = User::class;
+
+    public function getByEmail($email): ?User
+    {
+        return User::where('email', $email)->first();
+    }
 }
