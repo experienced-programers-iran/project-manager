@@ -42,7 +42,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected static function newFactory()
+    protected static function newFactory(): \Modules\Auth\Database\factories\UserFactory
     {
         return \Modules\Auth\Database\factories\UserFactory::new();
     }
