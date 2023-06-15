@@ -19,6 +19,7 @@ class AuthDatabaseSeeder extends Seeder
 
 
 //        User::factory(4);
+         $this->call(RoleTableSeeder::class);
          $this->call(UserTableSeeder::class);
     }
 }
