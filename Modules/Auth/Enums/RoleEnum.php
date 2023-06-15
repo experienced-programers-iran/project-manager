@@ -1,8 +1,11 @@
 <?php
+
 namespace Modules\Auth\Enums;
 enum RoleEnum
 {
     case Administrator;
-    case Verified;
-    case UnVerified;
+    case ProjectOwner;
+    case ProjectManager;
+    case Employee;
+
 }
