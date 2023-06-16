@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Auth\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -15,6 +15,7 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = \Modules\Auth\Entities\User::class;
     public function definition(): array
     {
         return [
