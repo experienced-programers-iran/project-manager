@@ -13,6 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/project', function (Request $request) {
-    return $request->user();
-});
+Route::post('/',[\Modules\Project\Http\Controllers\ProjectController::class,'store']);

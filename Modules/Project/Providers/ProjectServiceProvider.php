@@ -4,6 +4,8 @@ namespace Modules\Project\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Project\Repositories\Interface\ProjectRepositoryInterface;
+use Modules\Project\Repositories\ProjectRepository;
 
 class ProjectServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,8 @@ class ProjectServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
+
     }
 
     /**
