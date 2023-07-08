@@ -1,5 +1,4 @@
 {
-    "Users": true,
-    "Login": true,
-    "Auth": true
+    "Auth": true,
+    "Project": true
 }
