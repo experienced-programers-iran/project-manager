@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Project\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +13,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/',[\Modules\Project\Http\Controllers\ProjectController::class,'store']);
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('/', [ProjectController::class, 'store']);
+});

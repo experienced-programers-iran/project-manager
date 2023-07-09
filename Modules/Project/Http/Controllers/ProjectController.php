@@ -6,6 +6,7 @@ use App\Services\ResponseService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Project\Http\Requests\StoreProjectRequest;
 use Modules\Project\Repositories\Interface\ProjectRepositoryInterface;
 use Modules\Project\Repositories\ProjectRepository;
 
@@ -18,8 +19,14 @@ class ProjectController extends ResponseService
         $this->projectRepository = $projectRepository;
     }
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        dd($request->all());
+        $user=\Auth::user();
+
+        $this->projectRepository->create([
+           'user_id' =>  $user->id,
+           'name' => $request->name,
+           'description' => $request->description,
+        ]);
     }
 }
