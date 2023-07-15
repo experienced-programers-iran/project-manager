@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/',[\Modules\Project\Http\Controllers\ProjectController::class,'store']);
+
+Route::post('/', [\Modules\Project\Http\Controllers\Api\ProjectController::class, 'store']);

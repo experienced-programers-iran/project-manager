@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Project\Http\Controllers;
+namespace Modules\Project\Http\Controllers\Api;
 
 use App\Services\ResponseService;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Project\Http\Requests\StoreProjectRequest;
 use Modules\Project\Repositories\Interface\ProjectRepositoryInterface;
 use Modules\Project\Repositories\ProjectRepository;
 
@@ -18,8 +17,10 @@ class ProjectController extends ResponseService
         $this->projectRepository = $projectRepository;
     }
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        dd($request->all());
+        DB::transaction(function () use ($request) {
+            #todo create project and project details
+        });
     }
 }
