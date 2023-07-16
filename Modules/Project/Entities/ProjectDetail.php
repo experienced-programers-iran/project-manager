@@ -11,7 +11,7 @@ class ProjectDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['end_date', 'start_date', 'budget'];
+    protected $fillable = [ 'project_id' ,'end_date', 'start_date', 'budget'];
 
     public function project(): BelongsTo
     {

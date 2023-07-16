@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Project\Repositories\Interface;
+namespace Modules\Project\Contracts\Repositories;
 
 use App\Repositories\Interface\BaseRepositoryInterface;
 
