@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Project\Database\factories\ProjectFactory;
+use Modules\Project\Enums\ProjectStatusEnums;
 
 class Project extends Model
 {
@@ -16,6 +17,10 @@ class Project extends Model
         'user_id',
         'name',
         'description'
+    ];
+
+    protected $casts = [
+        'status' => ProjectStatusEnums::class
     ];
 
     public function projectDetail(): HasOne
