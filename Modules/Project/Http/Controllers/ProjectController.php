@@ -6,6 +6,7 @@ use App\Services\ResponseService;
 use Illuminate\Support\Facades\DB;
 use Modules\Project\Contracts\Repositories\ProjectDetailsRepositoryInterface;
 use Modules\Project\Contracts\Repositories\ProjectRepositoryInterface;
+use Modules\Project\Enums\ProjectStatusEnums;
 use Modules\Project\Http\Requests\StoreProjectRequest;
 use Modules\Project\Repositories\ProjectRepository;
 
@@ -19,7 +20,6 @@ class ProjectController extends ResponseService
         $this->projectRepository = $projectRepository;
         $this->projectDetailsRepository = $projectDetailsRepository;
     }
-
     public function store(StoreProjectRequest $request)
     {
         DB::transaction(function () use ($request) {
@@ -27,6 +27,7 @@ class ProjectController extends ResponseService
             $project = $this->projectRepository->create([
                 'user_id' => auth()->id(),
                 'name' => $request->name,
+                'status' => ProjectStatusEnums::JUST_STARTED,
                 'description' => $request->description,
             ]);
 
