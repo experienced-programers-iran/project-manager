@@ -14,14 +14,18 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>[
+            'name' => [
                 'required',
+                'string',
                 'min:10',
                 'max:50',
             ],
-            'description'=>[
+            'description' => [
                 'max:150'
-            ]
+            ],
+            'budget' => ['nullable', 'numeric'],
+            'start_at' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            'end_at' => ['nullable', 'date_format:Y-m-d H:i:s'],
         ];
     }
 
