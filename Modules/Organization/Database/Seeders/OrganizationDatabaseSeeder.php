@@ -4,6 +4,7 @@ namespace Modules\Organization\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Organization\Entities\Organization;
 
 class OrganizationDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class OrganizationDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        Organization::factory(3)->create();
+//         $this->call("OthersTableSeeder");
     }
 }
