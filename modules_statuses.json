@@ -1,4 +1,5 @@
 {
     "Auth": true,
-    "Project": true
+    "Project": true,
+    "Shared": true
 }

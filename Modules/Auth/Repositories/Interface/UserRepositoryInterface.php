@@ -2,8 +2,8 @@
 
 namespace Modules\Auth\Repositories\Interface;
 
-use App\Repositories\Interface\BaseRepositoryInterface;
 use Modules\Auth\Entities\User;
+use Modules\Shared\Contracts\BaseRepositoryInterface;
 
 interface UserRepositoryInterface extends BaseRepositoryInterface
 {

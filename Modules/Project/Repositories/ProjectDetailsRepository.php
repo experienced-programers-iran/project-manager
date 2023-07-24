@@ -2,9 +2,9 @@
 
 namespace Modules\Project\Repositories;
 
-use App\Repositories\BaseRepository;
 use Modules\Project\Contracts\Repositories\ProjectDetailsRepositoryInterface;
 use Modules\Project\Entities\ProjectDetail;
+use Modules\Shared\Repositories\BaseRepository;
 
 class ProjectDetailsRepository extends BaseRepository implements ProjectDetailsRepositoryInterface
 {

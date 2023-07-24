@@ -2,11 +2,9 @@
 
 namespace Modules\Auth\Repositories;
 
-use App\Repositories\BaseRepository;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Auth\Entities\User;
 use Modules\Auth\Repositories\Interface\UserRepositoryInterface;
+use Modules\Shared\Repositories\BaseRepository;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Modules\Project\Contracts\Repositories;
 
-use App\Repositories\Interface\BaseRepositoryInterface;
+use Modules\Shared\Contracts\BaseRepositoryInterface;
 
 interface ProjectDetailsRepositoryInterface extends BaseRepositoryInterface
 {
