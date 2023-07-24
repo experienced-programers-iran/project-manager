@@ -4,8 +4,10 @@ namespace Modules\Project\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Modules\Auth\Entities\User;
 use Modules\Project\Database\factories\ProjectFactory;
 use Modules\Project\Enums\ProjectStatusEnums;
 
@@ -24,7 +26,7 @@ class Project extends Model
         'status' => ProjectStatusEnums::class
     ];
 
-    public function projectDetail(): HasOne
+    public function detail(): HasOne
     {
         return $this->hasOne(ProjectDetail::class);
     }
@@ -37,5 +39,10 @@ class Project extends Model
     protected static function newFactory(): ProjectFactory
     {
         return ProjectFactory::new();
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
