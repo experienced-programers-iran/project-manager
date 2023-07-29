@@ -4,7 +4,10 @@ namespace Modules\Organization\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Auth\Entities\User;
 use Modules\Organization\Entities\Organization;
+use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectDetail;
 
 class OrganizationDatabaseSeeder extends Seeder
 {
@@ -13,11 +16,19 @@ class OrganizationDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Model::unguard();
 
-        Organization::factory(3)->create();
-//         $this->call("OthersTableSeeder");
+        User::factory(5)->has(
+            factory: Organization::factory(rand(1, 3))
+                ->has(
+                    factory: Project::factory(rand(1, 3))
+                        ->has(
+                            factory: projectDetail::factory()
+                        )
+                )
+        )->create();
+
     }
 }

@@ -4,8 +4,9 @@ namespace Modules\Project\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Modules\Organization\Entities\Organization;
 use Modules\Project\Database\factories\ProjectFactory;
 use Modules\Project\Enums\ProjectStatusEnums;
 
@@ -14,7 +15,6 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'name',
         'description' ,
         'status'
@@ -28,10 +28,9 @@ class Project extends Model
     {
         return $this->hasOne(ProjectDetail::class);
     }
-
-    public function projectOwners(): HasMany
+    public function organization(): BelongsTo
     {
-        return $this->hasMany(ProjectOwner::class);
+        return $this->belongsTo(Organization::class);
     }
 
     protected static function newFactory(): ProjectFactory

@@ -4,6 +4,9 @@ namespace Modules\Project\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Auth\Entities\User;
+use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectDetail;
 
 class ProjectDatabaseSeeder extends Seeder
 {
@@ -15,7 +18,5 @@ class ProjectDatabaseSeeder extends Seeder
     public function run(): void
     {
         Model::unguard();
-
-         $this->call(ProjectTableSeeder::class);
     }
 }
