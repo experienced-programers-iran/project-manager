@@ -17,7 +17,12 @@ class UserTableSeeder extends Seeder
     {
         Model::unguard();
 
-        User::factory(5)->create();
+        User::factory()
+            ->state([
+                'email' => 'a@a.com',
+                'password' => \Hash::make('123123'),
+            ])
+            ->create();
         // $this->call("OthersTableSeeder");
     }
 }

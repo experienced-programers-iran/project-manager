@@ -3,14 +3,15 @@
 namespace Modules\Organization\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\Organization\Contracts\Repositories\OrganizationRepositoryInterface;
+use Modules\Organization\Repositories\OrganizationRepository;
 
 class OrganizationServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Organization';
+    protected string $moduleName = 'Organization';
 
     /**
      * @var string $moduleNameLower
@@ -38,6 +39,8 @@ class OrganizationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
+
     }
 
     /**

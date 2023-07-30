@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Organization\Http\Controllers\OrganizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/organization', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('/', [OrganizationController::class, 'store']);
 });
