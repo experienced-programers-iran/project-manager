@@ -22,7 +22,7 @@ class ResponseService extends Controller
      * @param int $statusCode
      * @return JsonResponse
      */
-    public function generateResponse(
+    public static function generateResponse(
              $result = null,
         bool $status = true,
              $message = null,
