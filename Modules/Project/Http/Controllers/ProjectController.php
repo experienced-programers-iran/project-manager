@@ -4,6 +4,7 @@ namespace Modules\Project\Http\Controllers;
 
 use App\Services\ResponseService;
 use Illuminate\Support\Facades\DB;
+use Modules\Organization\Entities\Organization;
 use Modules\Project\Contracts\Repositories\ProjectDetailsRepositoryInterface;
 use Modules\Project\Contracts\Repositories\ProjectRepositoryInterface;
 use Modules\Project\Enums\ProjectStatusEnums;
@@ -20,26 +21,40 @@ class ProjectController extends ResponseService
         $this->projectRepository = $projectRepository;
         $this->projectDetailsRepository = $projectDetailsRepository;
     }
-    public function store(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request,Organization $organization)
     {
-        DB::transaction(function () use ($request) {
+
+        try {
+
+        return DB::transaction(function () use ($request,$organization) {
 
             $project = $this->projectRepository->create([
-                'user_id' => auth()->id(),
+                'organization_id' =>$organization->id,
                 'name' => $request->name,
                 'status' => ProjectStatusEnums::JUST_STARTED,
                 'description' => $request->description,
             ]);
 
-            $this->projectDetailsRepository->create([
+            $project->projectDetail()->create([
                 'project_id' => $project->id,
                 'budget' => $request->budget,
                 'start_at' => $request->start_at,
                 'end_at' => $request->end_at,
             ]);
+            return $this->generateResponse(
+                result:$project,
+                statusCode: 201
+            );
         });
+        }catch (\Exception $e){
+            return $this->generateResponse(
+                result: $e,
+                status: false,
+                message: 'Something went wrong',
+                statusCode: 500
+            );
+        }
 
-        #todo return response
     }
 }
 

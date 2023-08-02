@@ -14,5 +14,5 @@ use Modules\Project\Http\Controllers\ProjectController;
 |
 */
 Route::middleware(['auth:api'])->group(function () {
-    Route::post('/', [ProjectController::class, 'store']);
+    Route::post('/organization/{organization}', [ProjectController::class, 'store']);
 });
