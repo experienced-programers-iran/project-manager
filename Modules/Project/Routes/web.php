@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('project')->group(function() {
+Route::prefix('project')->group(function () {
     Route::get('/', 'ProjectController@index');
 });

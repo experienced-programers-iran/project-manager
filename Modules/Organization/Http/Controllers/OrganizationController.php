@@ -3,9 +3,6 @@
 namespace Modules\Organization\Http\Controllers;
 
 use App\Services\ResponseService;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Organization\Contracts\Repositories\OrganizationRepositoryInterface;
 use Modules\Organization\Http\Requests\StoreOrganizationRequest;
@@ -13,7 +10,6 @@ use Modules\Organization\Transformers\OrganizationResource;
 
 class OrganizationController extends ResponseService
 {
-
     protected OrganizationRepositoryInterface $organizationRepository;
 
     public function __construct(OrganizationRepositoryInterface $organizationRepository)
@@ -25,21 +21,22 @@ class OrganizationController extends ResponseService
     {
         return DB::transaction(function () use ($request) {
 
-            #todo create upload file module to upload organization logo
+            //todo create upload file module to upload organization logo
             $project = $this->organizationRepository->create([
                 'user_id' => auth()->id(),
                 'name' => $request->name,
                 'description' => $request->description,
-//                'logo' => $request->description,
+                //                'logo' => $request->description,
             ]);
-            if ($project)
+            if ($project) {
                 return $this->generateResponse(
                     result: OrganizationResource::make($project)
                 );
-            else
+            } else {
                 return $this->generateResponse(
                     status: false
                 );
+            }
         });
 
     }

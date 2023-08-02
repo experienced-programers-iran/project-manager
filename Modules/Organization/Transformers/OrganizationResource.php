@@ -11,19 +11,16 @@ class OrganizationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
-     *
-     * @param Request $request
-     * @return array
      */
     public function toArray(Request $request): array
     {
-        #todo show file(logo) in resource
+        //todo show file(logo) in resource
         /** @var Organization $this */
         return [
-            'name'=>$this->name,
-            'users'=>UserResource::collection($this->users),
-            'description'=>$this->description,
-            'logo'=>$this->logo,
+            'name' => $this->name,
+            'users' => UserResource::collection($this->users),
+            'description' => $this->description,
+            'logo' => $this->logo,
         ];
     }
 }

@@ -6,5 +6,4 @@ use App\Repositories\Interface\BaseRepositoryInterface;
 
 interface OrganizationRepositoryInterface extends BaseRepositoryInterface
 {
-
 }

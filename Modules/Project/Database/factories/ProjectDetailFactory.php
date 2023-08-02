@@ -16,19 +16,17 @@ class ProjectDetailFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
-        $start_date=$this->faker->dateTimeThisMonth;
+        $start_date = $this->faker->dateTimeThisMonth;
+
         return [
             'start_date' => $start_date,
             'end_date' => $this->faker->dateTimeBetween(
-                startDate:$start_date
+                startDate: $start_date
             ),
-            'budget' =>  $this->faker->randomFloat(2, 0, 10000),
+            'budget' => $this->faker->randomFloat(2, 0, 10000),
         ];
     }
 }
-

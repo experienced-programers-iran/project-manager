@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Organization\Http\Controllers\OrganizationController;
 
 /*

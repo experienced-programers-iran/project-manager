@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
             return ResponseService::generateResponse(
                 status: false,
                 message: method_exists($model,
-                'notFoundMessage') ? $model->notFoundMessage() : "Resource not found",
+                    'notFoundMessage') ? $model->notFoundMessage() : 'Resource not found',
                 statusCode: 404
             );
 

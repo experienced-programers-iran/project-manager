@@ -16,19 +16,15 @@ class ResponseService extends Controller
     |
     */
     /**
-     * @param null $result
-     * @param bool $status
-     * @param null $message
-     * @param int $statusCode
-     * @return JsonResponse
+     * @param  null  $result
+     * @param  null  $message
      */
     public static function generateResponse(
-             $result = null,
+        $result = null,
         bool $status = true,
-             $message = null,
+        $message = null,
         int $statusCode = 200
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $response = [
             'status' => $status,
         ];

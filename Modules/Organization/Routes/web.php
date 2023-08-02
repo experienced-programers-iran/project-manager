@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('organization')->group(function() {
+Route::prefix('organization')->group(function () {
     Route::get('/', 'OrganizationController@index');
 });

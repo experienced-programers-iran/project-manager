@@ -2,8 +2,8 @@
 
 namespace Modules\Organization\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Auth\Entities\User;
 use Modules\Organization\Entities\Organization;
 use Modules\Project\Entities\Project;
@@ -13,8 +13,6 @@ class OrganizationDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

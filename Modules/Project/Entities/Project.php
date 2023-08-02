@@ -2,8 +2,8 @@
 
 namespace Modules\Project\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Organization\Entities\Organization;
@@ -16,19 +16,20 @@ class Project extends Model
 
     protected $fillable = [
         'name',
-        'description' ,
-        'organization_id' ,
-        'status'
+        'description',
+        'organization_id',
+        'status',
     ];
 
     protected $casts = [
-        'status' => ProjectStatusEnums::class
+        'status' => ProjectStatusEnums::class,
     ];
 
     public function projectDetail(): HasOne
     {
         return $this->hasOne(ProjectDetail::class);
     }
+
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);

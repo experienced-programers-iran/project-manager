@@ -14,10 +14,11 @@ class UserController extends ResponseService
     {
         $this->userRepository = $userRepository;
     }
+
     public function getUser()
     {
-        $user=\Auth::user();
+        $user = \Auth::user();
+
         return $this->generateResponse(result: UserResource::make($user));
     }
-
 }

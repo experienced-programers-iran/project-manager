@@ -14,7 +14,7 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
 
     public function __construct()
     {
-        if (!empty($this->model)) {
+        if (! empty($this->model)) {
             $this->query = (new $this->model);
         }
     }
@@ -26,25 +26,28 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
 
     public function get(int $id)
     {
-        if (!$item = $this->query->find($id)) {
+        if (! $item = $this->query->find($id)) {
             return $this->notFound();
         }
+
         return $item;
     }
 
     public function getTrashed(int $id)
     {
-        if (!$item = $this->query->onlyTrashed()->find($id)) {
+        if (! $item = $this->query->onlyTrashed()->find($id)) {
             return $this->notFound();
         }
+
         return $item;
     }
 
     public function getWithTrashed(int $id)
     {
-        if (!$item = $this->query->withTrashed()->find($id)) {
+        if (! $item = $this->query->withTrashed()->find($id)) {
             return $this->notFound();
         }
+
         return $item;
     }
 
@@ -66,6 +69,7 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
     public function update(int $id, array $data)
     {
         $model = $this->query->find($id);
+
         return tap($model)->update($data);
     }
 
@@ -77,14 +81,14 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
     public function delete(int $id)
     {
         $item = $this->getWithTrashed($id);
+
         return $item->forceDelete();
     }
 
     public function restore(int $id): bool
     {
         $item = $this->getTrashed($id);
+
         return $item->restore();
     }
-
-
 }

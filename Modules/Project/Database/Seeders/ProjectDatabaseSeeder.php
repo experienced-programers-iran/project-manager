@@ -2,18 +2,13 @@
 
 namespace Modules\Project\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Auth\Entities\User;
-use Modules\Project\Entities\Project;
-use Modules\Project\Entities\ProjectDetail;
+use Illuminate\Database\Seeder;
 
 class ProjectDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

@@ -16,16 +16,13 @@ class OrganizationFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
             'name' => $this->faker->name(),
-            'description' =>  $this->faker->text(150),
-            'logo' =>  $this->faker->image,
+            'description' => $this->faker->text(150),
+            'logo' => $this->faker->image,
         ];
     }
 }
-

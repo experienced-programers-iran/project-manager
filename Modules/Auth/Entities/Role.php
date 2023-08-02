@@ -9,12 +9,16 @@ use Modules\Auth\Enums\RoleEnum;
 
 class Role extends Model
 {
-use HasFactory;
+    use HasFactory;
+
     protected $fillable = ['name'];
+
     public $timestamps = false;
+
     protected $casts = [
-        'name' => RoleEnum::class
+        'name' => RoleEnum::class,
     ];
+
     protected static function newFactory(): RoleFactory
     {
         return RoleFactory::new();

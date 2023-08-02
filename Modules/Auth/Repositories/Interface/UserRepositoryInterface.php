@@ -8,5 +8,5 @@ use Modules\Auth\Entities\User;
 interface UserRepositoryInterface extends BaseRepositoryInterface
 {
     //
-    public function getByEmail($email):?User;
+    public function getByEmail($email): ?User;
 }
