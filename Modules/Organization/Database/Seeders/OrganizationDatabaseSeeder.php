@@ -1,0 +1,32 @@
+<?php
+
+namespace Modules\Organization\Database\Seeders;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+use Modules\Auth\Entities\User;
+use Modules\Organization\Entities\Organization;
+use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectDetail;
+
+class OrganizationDatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        Model::unguard();
+
+        User::factory(5)->has(
+            factory: Organization::factory(rand(1, 3))
+                ->has(
+                    factory: Project::factory(rand(1, 3))
+                        ->has(
+                            factory: projectDetail::factory()
+                        )
+                )
+        )->create();
+
+    }
+}

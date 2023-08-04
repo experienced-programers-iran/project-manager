@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace Modules\Shared\Repositories;
 
-use App\Repositories\Interface\BaseRepositoryInterface;
 use App\Services\ResponseService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Modules\Shared\Contracts\BaseRepositoryInterface;
 
 abstract class BaseRepository extends ResponseService implements BaseRepositoryInterface
 {
@@ -24,7 +24,7 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         throw new HttpResponseException($this->generateResponse(status: false, message: __('global.not_found_error'), statusCode: 404));
     }
 
-    public function get(int $id)
+    public function findById(int $id)
     {
         if (!$item = $this->query->find($id)) {
             return $this->notFound();
@@ -32,7 +32,7 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         return $item;
     }
 
-    public function getTrashed(int $id)
+    public function findByIdOnlyTrashed(int $id)
     {
         if (!$item = $this->query->onlyTrashed()->find($id)) {
             return $this->notFound();
@@ -40,7 +40,7 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         return $item;
     }
 
-    public function getWithTrashed(int $id)
+    public function findByIdWithTrashed(int $id)
     {
         if (!$item = $this->query->withTrashed()->find($id)) {
             return $this->notFound();
@@ -52,12 +52,10 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
     {
         return $this->query->latest()->get();
     }
-
     public function destroy(int $id): bool
     {
         return $this->query->find($id)->delete();
     }
-
     public function create(array $data)
     {
         return $this->query->create($data);
@@ -69,14 +67,9 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         return tap($model)->update($data);
     }
 
-    public function trash(int $id): bool
+    public function forceDestroy(int $id)
     {
-        return $this->query->find($id)->delete();
-    }
-
-    public function delete(int $id)
-    {
-        $item = $this->getWithTrashed($id);
+        $item = $this->findByIdWithTrashed($id);
         return $item->forceDelete();
     }
 
@@ -85,6 +78,4 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         $item = $this->getTrashed($id);
         return $item->restore();
     }
-
-
 }

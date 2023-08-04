@@ -2,12 +2,15 @@
 
 namespace Modules\Auth\Entities;
 
-
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Modules\Auth\Database\factories\UserFactory;
+use Modules\Organization\Entities\Organization;
+use Modules\Project\Entities\Project;
 
 class User extends Authenticatable
 {
@@ -42,8 +45,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected static function newFactory(): \Modules\Auth\Database\factories\UserFactory
+
+    public function projects(): HasMany
     {
-        return \Modules\Auth\Database\factories\UserFactory::new();
+        return $this->hasMany(Project::class);
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
+    }
+
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class);
     }
 }

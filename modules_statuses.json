@@ -1,5 +1,6 @@
 {
-    "Users": true,
-    "Login": true,
-    "Auth": true
+    "Auth": true,
+    "Project": true,
+    "Shared": true,
+    "Organization": true
 }

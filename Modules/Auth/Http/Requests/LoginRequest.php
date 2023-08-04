@@ -3,8 +3,8 @@
 namespace Modules\Auth\Http\Requests;
 
 use App\Services\ResponseService;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LoginRequest extends FormRequest
@@ -13,6 +13,7 @@ class LoginRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
