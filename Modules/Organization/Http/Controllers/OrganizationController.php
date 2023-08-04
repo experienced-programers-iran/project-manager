@@ -21,16 +21,15 @@ class OrganizationController extends ResponseService
     {
         return DB::transaction(function () use ($request) {
 
+            $user=\Auth::user();
             //todo create upload file module to upload organization logo
-            $project = $this->organizationRepository->create([
-                'user_id' => auth()->id(),
+            $organization=$user->organizations()->create([
                 'name' => $request->name,
                 'description' => $request->description,
-                //                'logo' => $request->description,
             ]);
-            if ($project) {
+            if ($organization) {
                 return $this->generateResponse(
-                    result: OrganizationResource::make($project)
+                    result: OrganizationResource::make($organization)
                 );
             } else {
                 return $this->generateResponse(
