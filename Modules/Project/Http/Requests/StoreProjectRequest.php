@@ -8,10 +8,8 @@ class StoreProjectRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => [
@@ -21,7 +19,7 @@ class StoreProjectRequest extends FormRequest
                 'max:50',
             ],
             'description' => [
-                'max:150'
+                'max:150',
             ],
             'budget' => ['nullable', 'numeric'],
             'start_at' => ['nullable', 'date_format:Y-m-d H:i:s'],
@@ -31,8 +29,6 @@ class StoreProjectRequest extends FormRequest
 
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {

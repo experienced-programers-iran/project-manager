@@ -16,15 +16,12 @@ class ProjectFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
             'name' => $this->faker->name(),
-            'description' =>  $this->faker->text(200),
+            'description' => $this->faker->text(200),
         ];
     }
 }
-

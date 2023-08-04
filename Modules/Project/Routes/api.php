@@ -15,5 +15,5 @@ use Modules\Project\Http\Controllers\ProjectController;
 */
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('panel.projects.index');
-    Route::post('/', [ProjectController::class, 'store'])->name('panel.projects.store');
+    Route::post('/organization/{organization}', [ProjectController::class, 'store'])->name('panel.projects.store');
 });

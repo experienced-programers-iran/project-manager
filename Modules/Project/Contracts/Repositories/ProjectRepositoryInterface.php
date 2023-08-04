@@ -6,5 +6,4 @@ use Modules\Shared\Contracts\BaseRepositoryInterface;
 
 interface ProjectRepositoryInterface extends BaseRepositoryInterface
 {
-
 }
