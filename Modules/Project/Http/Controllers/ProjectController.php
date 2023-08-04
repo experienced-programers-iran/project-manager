@@ -10,6 +10,7 @@ use Modules\Project\Contracts\Repositories\ProjectRepositoryInterface;
 use Modules\Project\Enums\ProjectStatusEnums;
 use Modules\Project\Http\Requests\StoreProjectRequest;
 use Modules\Project\Repositories\ProjectRepository;
+use Modules\Project\Transformers\ProjectResource;
 
 class ProjectController extends ResponseService
 {
@@ -30,8 +31,7 @@ class ProjectController extends ResponseService
 
             return DB::transaction(function () use ($request, $organization) {
 
-                $project = $this->projectRepository->create([
-                    'organization_id' => $organization->id,
+                $project = $organization->projects()->create([
                     'name' => $request->name,
                     'status' => ProjectStatusEnums::JUST_STARTED,
                     'description' => $request->description,
@@ -45,7 +45,7 @@ class ProjectController extends ResponseService
                 ]);
 
                 return $this->generateResponse(
-                    result: $project,
+                    result: ProjectResource::make($project),
                     statusCode: 201
                 );
             });

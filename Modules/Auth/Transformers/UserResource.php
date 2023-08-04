@@ -17,7 +17,6 @@ class UserResource extends JsonResource
         $result = [
             'name' => $this->name,
             'email' => $this->email,
-            'created_at' => $this->created_at,
         ];
         if (! empty($this->accessToken)) {
             $result['access_token'] = $this->accessToken;

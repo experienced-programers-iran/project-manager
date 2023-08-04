@@ -17,6 +17,7 @@ class OrganizationResource extends JsonResource
         //todo show file(logo) in resource
         /** @var Organization $this */
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'users' => UserResource::collection($this->users),
             'description' => $this->description,
