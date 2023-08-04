@@ -12,15 +12,11 @@ interface BaseRepositoryInterface
 
     public function findByIdWithTrashed(int $id);
 
-    public function trash(int $id);
-
     public function restore(int $id);
 
     public function destroy(int $id);
 
     public function forceDestroy(int $id);
-
-    public function forceDelete(int $id);
 
     public function create(array $data);
 

@@ -67,11 +67,6 @@ abstract class BaseRepository extends ResponseService implements BaseRepositoryI
         return tap($model)->update($data);
     }
 
-    public function trash(int $id): bool
-    {
-        return $this->query->find($id)->delete();
-    }
-
     public function forceDestroy(int $id)
     {
         $item = $this->findByIdWithTrashed($id);
