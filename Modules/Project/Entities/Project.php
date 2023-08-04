@@ -25,7 +25,7 @@ class Project extends Model
         'status' => ProjectStatusEnums::class,
     ];
 
-    public function projectDetail(): HasOne
+    public function detail(): HasOne
     {
         return $this->hasOne(ProjectDetail::class);
     }

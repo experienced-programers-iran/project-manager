@@ -24,6 +24,9 @@ class ProjectResource extends JsonResource
             'organization'=>OrganizationResource::make($this->organization),
             'description'=>$this->description,
             'status'=>ProjectStatusResource::make($this->status),
+            'budget' => $this->detail->budget ,
+            'start_date' => $this->detail->start_date ,
+            'end_date' => $this->detail->end_date ,
         ];
     }
 }

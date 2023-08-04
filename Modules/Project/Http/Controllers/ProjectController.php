@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Organization\Entities\Organization;
 use Modules\Project\Contracts\Repositories\ProjectDetailsRepositoryInterface;
 use Modules\Project\Contracts\Repositories\ProjectRepositoryInterface;
+use Modules\Project\Entities\Project;
 use Modules\Project\Enums\ProjectStatusEnums;
 use Modules\Project\Http\Requests\StoreProjectRequest;
 use Modules\Project\Repositories\ProjectRepository;
@@ -15,7 +16,6 @@ use Modules\Project\Transformers\ProjectResource;
 class ProjectController extends ResponseService
 {
     protected ProjectRepository $projectRepository;
-
     protected ProjectDetailsRepositoryInterface $projectDetailsRepository;
 
     public function __construct(ProjectRepositoryInterface $projectRepository, ProjectDetailsRepositoryInterface $projectDetailsRepository)
@@ -23,7 +23,11 @@ class ProjectController extends ResponseService
         $this->projectRepository = $projectRepository;
         $this->projectDetailsRepository = $projectDetailsRepository;
     }
-
+    public function index()
+    {
+        $projects = Project::query()->latest()->get();
+        return ProjectResource::collection($projects);
+    }
     public function store(StoreProjectRequest $request, Organization $organization)
     {
 
@@ -37,7 +41,7 @@ class ProjectController extends ResponseService
                     'description' => $request->description,
                 ]);
 
-                $project->projectDetail()->create([
+                $project->detail()->create([
                     'project_id' => $project->id,
                     'budget' => $request->budget,
                     'start_at' => $request->start_at,

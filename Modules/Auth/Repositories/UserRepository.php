@@ -2,9 +2,9 @@
 
 namespace Modules\Auth\Repositories;
 
-use App\Repositories\BaseRepository;
 use Modules\Auth\Entities\User;
 use Modules\Auth\Repositories\Interface\UserRepositoryInterface;
+use Modules\Shared\Repositories\BaseRepository;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
